@@ -1,0 +1,16 @@
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\bin\Debug\net8.0\CryptoAgent.Application.deps.json
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\bin\Debug\net8.0\CryptoAgent.Application.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\bin\Debug\net8.0\CryptoAgent.Application.pdb
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\bin\Debug\net8.0\CryptoAgent.Domain.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\bin\Debug\net8.0\CryptoAgent.Domain.pdb
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAgent.Application.csproj.AssemblyReference.cache
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAgent.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAgent.Application.AssemblyInfoInputs.cache
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAgent.Application.AssemblyInfo.cs
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAgent.Application.csproj.CoreCompileInputs.cache
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAgent.Application.sourcelink.json
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAg.CC4CD158.Up2Date
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAgent.Application.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\refint\CryptoAgent.Application.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\CryptoAgent.Application.pdb
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Application\obj\Debug\net8.0\ref\CryptoAgent.Application.dll

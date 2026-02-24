@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "u8D96xB52WKyDCrsy7R1TOF0dEBk0s2K8FjowHLNlNFdQ05yhIzmMus5YJYp7prvHzQEcXAcshZroH3++GLoWg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Juanma\\Documents\\GitHub\\crypto-trading-agent\\backend\\src\\CryptoAgent.Domain\\CryptoAgent.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Juanma\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Juanma\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Juanma\\.nuget\\packages\\npgsql\\8.0.3\\npgsql.8.0.3.nupkg.sha512",
+    "C:\\Users\\Juanma\\.nuget\\packages\\pgvector\\0.3.0\\pgvector.0.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

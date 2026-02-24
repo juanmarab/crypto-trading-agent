@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "fwKyUqg2Io4AQHB8HdToGEuo1KJ9lcMgiKnmWXm4fD8=",
+  "Source": "CryptoAgent.Api",
+  "BasePath": "_content/CryptoAgent.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

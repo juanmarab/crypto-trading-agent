@@ -1,0 +1,13 @@
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\bin\Debug\net8.0\CryptoAgent.Domain.deps.json
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\bin\Debug\net8.0\CryptoAgent.Domain.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\bin\Debug\net8.0\CryptoAgent.Domain.pdb
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\CryptoAgent.Domain.csproj.AssemblyReference.cache
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\CryptoAgent.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\CryptoAgent.Domain.AssemblyInfoInputs.cache
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\CryptoAgent.Domain.AssemblyInfo.cs
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\CryptoAgent.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\CryptoAgent.Domain.sourcelink.json
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\CryptoAgent.Domain.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\refint\CryptoAgent.Domain.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\CryptoAgent.Domain.pdb
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Domain\obj\Debug\net8.0\ref\CryptoAgent.Domain.dll
