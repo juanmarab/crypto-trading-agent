@@ -1,2 +1,61 @@
-# crypto-trading-agent
-AI Crypto Trading Agent
+# 📈 AI Crypto Trading Agent & RAG Sentinel
+
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)
+
+An automated, hybrid algorithmic trading assistant designed to solve the latency in manual crypto trading. This system combines mathematical rigor (Technical Analysis) with natural language understanding (Fundamental Analysis via RAG) to provide real-time, actionable trading setups.
+
+> **Note:** To ensure high data quality and system performance, this project strictly monitors the most liquid assets: **BTC/USDT, ETH/USDT, SOL/USDT, and BNB/USDT**.
+
+## 🧠 The Dual-Engine Architecture
+
+
+
+This agent does not rely on a single source of truth. It makes decisions by finding the convergence between two autonomous engines:
+
+1. **The Logical Brain (Technical Analysis):** A deterministic .NET 8 service connected to Binance WebSockets and REST APIs. It continuously calculates EMAs, RSI, MACD, Bollinger Bands, and ATR to identify market momentum and volatility.
+2. **The Semantic Brain (Fundamental Analysis):** A Retrieval-Augmented Generation (RAG) pipeline that ingests breaking financial news using the CryptoPanic API. It generates vector embeddings and stores them in PostgreSQL (`pgvector`), allowing the LLM to contextually understand market sentiment before making a decision.
+
+## ✨ Key Features
+
+* **Real-Time Dashboard:** A responsive React SPA featuring advanced TradingView-style charting (`lightweight-charts`), technical indicator overlays, and a live feed of vectorized news.
+* **The "Glass Box" AI:** Complete transparency into the LLM's reasoning. The dashboard explicitly breaks down the Technical Verdict, the Fundamental Verdict (with news citations), and the final Long/Short recommendation.
+* **Dynamic Risk Management:** Instead of static leverage, the AI suggests specific leverage limits based on current asset volatility (ATR) and the sentiment of recent news.
+* **Push Notifications:** Instant Telegram alerts triggered when high-probability setups are detected, keeping the user informed without needing to monitor the dashboard 24/7.
+
+## 🛠️ Tech Stack
+
+* **Frontend:** React (Vite), Zustand/Redux for state management, Lightweight Charts.
+* **Backend:** C# .NET 8 (Web API & Background Worker Services).
+* **Database:** PostgreSQL with the `pgvector` extension for semantic search.
+* **AI & Embeddings:** Google Gemini / Groq API for reasoning, `text-embedding-3-small` (or similar) for vectorization.
+* **External Integrations:** Binance API (Market Data), CryptoPanic API (News), Telegram Bot API (Alerts).
+
+## ☁️ Deployment Architecture (Free Tier Stack)
+
+This project is architected to run entirely on robust free-tier cloud services, demonstrating a cost-effective, cloud-native deployment strategy:
+
+* **Frontend Hosting (Vercel):** The React SPA is deployed on Vercel, providing a fast global CDN, seamless CI/CD integration from GitHub, and optimal performance for the UI.
+* **Backend API & Workers (Render):** The .NET 8 Web API and the RAG Background Service are containerized via Docker and deployed on Render's Web Service free tier.
+* **Vector Database (Supabase):** PostgreSQL database hosting is handled by Supabase, which natively supports the `pgvector` extension required for our semantic news search.
+* **AI & Market Data Providers:** * **Groq / Google Gemini:** Providing high-speed, zero-cost LLM inference.
+  * **Binance Public API:** Supplying real-time WebSocket data without requiring funded accounts.
+  * **CryptoPanic API:** Delivering the fundamental news feed.
+
+## 🚀 Getting Started (Local Development)
+
+### Prerequisites
+* Node.js (v18+)
+* .NET 8.0 SDK
+* PostgreSQL (with `pgvector` enabled) or a local Docker container.
+* API Keys for Binance, CryptoPanic, Telegram, and your chosen LLM.
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/yourusername/ai-crypto-agent.git](https://github.com/yourusername/ai-crypto-agent.git)
+   cd ai-crypto-agent
