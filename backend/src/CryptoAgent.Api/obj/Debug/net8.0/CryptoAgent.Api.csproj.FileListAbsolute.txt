@@ -50,3 +50,11 @@ C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Ap
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\obj\Debug\net8.0\CryptoAgent.Api.pdb
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\obj\Debug\net8.0\CryptoAgent.Api.genruntimeconfig.cache
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\obj\Debug\net8.0\ref\CryptoAgent.Api.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\bin\Debug\net8.0\Binance.Net.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\bin\Debug\net8.0\CryptoExchange.Net.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Api\bin\Debug\net8.0\System.Text.Json.dll

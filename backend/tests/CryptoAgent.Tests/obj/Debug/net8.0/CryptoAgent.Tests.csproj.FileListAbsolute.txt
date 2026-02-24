@@ -121,3 +121,14 @@ C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\obj\Debug\net8.0\CryptoAgent.Tests.pdb
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\obj\Debug\net8.0\CryptoAgent.Tests.genruntimeconfig.cache
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\obj\Debug\net8.0\ref\CryptoAgent.Tests.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Binance.Net.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\CryptoExchange.Net.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\tests\CryptoAgent.Tests\bin\Debug\net8.0\System.Text.Json.dll
