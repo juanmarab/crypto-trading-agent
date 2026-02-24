@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1D157309-C9E6-4FF8-A11D-B5F12F6E6FCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAgent.Domain", "src\CryptoAgent.Domain\CryptoAgent.Domain.csproj", "{47DBBE94-B05A-4F0D-90B3-3BDCFC2FBCBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAgent.Application", "src\CryptoAgent.Application\CryptoAgent.Application.csproj", "{1D7100AA-F121-4E2D-8B0E-B97B760972DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAgent.Infrastructure", "src\CryptoAgent.Infrastructure\CryptoAgent.Infrastructure.csproj", "{24BBFFFC-D506-4B24-BBF0-6E150D3F1A77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAgent.Api", "src\CryptoAgent.Api\CryptoAgent.Api.csproj", "{195BEA5D-2C26-47D5-B4F0-EE3FDE37BA87}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0B8B338B-6733-413B-8EF6-D888564E953B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoAgent.Tests", "tests\CryptoAgent.Tests\CryptoAgent.Tests.csproj", "{36D9F285-C3A5-49D9-80E7-1F5FBB544F08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{47DBBE94-B05A-4F0D-90B3-3BDCFC2FBCBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47DBBE94-B05A-4F0D-90B3-3BDCFC2FBCBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47DBBE94-B05A-4F0D-90B3-3BDCFC2FBCBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47DBBE94-B05A-4F0D-90B3-3BDCFC2FBCBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D7100AA-F121-4E2D-8B0E-B97B760972DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D7100AA-F121-4E2D-8B0E-B97B760972DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D7100AA-F121-4E2D-8B0E-B97B760972DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D7100AA-F121-4E2D-8B0E-B97B760972DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24BBFFFC-D506-4B24-BBF0-6E150D3F1A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24BBFFFC-D506-4B24-BBF0-6E150D3F1A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24BBFFFC-D506-4B24-BBF0-6E150D3F1A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24BBFFFC-D506-4B24-BBF0-6E150D3F1A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{195BEA5D-2C26-47D5-B4F0-EE3FDE37BA87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{195BEA5D-2C26-47D5-B4F0-EE3FDE37BA87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{195BEA5D-2C26-47D5-B4F0-EE3FDE37BA87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{195BEA5D-2C26-47D5-B4F0-EE3FDE37BA87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36D9F285-C3A5-49D9-80E7-1F5FBB544F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D9F285-C3A5-49D9-80E7-1F5FBB544F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D9F285-C3A5-49D9-80E7-1F5FBB544F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D9F285-C3A5-49D9-80E7-1F5FBB544F08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47DBBE94-B05A-4F0D-90B3-3BDCFC2FBCBC} = {1D157309-C9E6-4FF8-A11D-B5F12F6E6FCD}
+		{1D7100AA-F121-4E2D-8B0E-B97B760972DA} = {1D157309-C9E6-4FF8-A11D-B5F12F6E6FCD}
+		{24BBFFFC-D506-4B24-BBF0-6E150D3F1A77} = {1D157309-C9E6-4FF8-A11D-B5F12F6E6FCD}
+		{195BEA5D-2C26-47D5-B4F0-EE3FDE37BA87} = {1D157309-C9E6-4FF8-A11D-B5F12F6E6FCD}
+		{36D9F285-C3A5-49D9-80E7-1F5FBB544F08} = {0B8B338B-6733-413B-8EF6-D888564E953B}
+	EndGlobalSection
+EndGlobal

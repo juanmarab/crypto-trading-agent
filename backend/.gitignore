@@ -1,0 +1,27 @@
+## .NET
+bin/
+obj/
+*.user
+*.userosscproj
+*.suo
+*.cache
+*.dll
+*.pdb
+*.exe
+
+## User secrets
+secrets.json
+
+## IDE
+.vs/
+.idea/
+*.swp
+*~
+
+## Build
+publish/
+out/
+
+## OS
+Thumbs.db
+.DS_Store
