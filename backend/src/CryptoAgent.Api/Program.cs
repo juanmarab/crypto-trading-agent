@@ -1,5 +1,6 @@
 using CryptoAgent.Infrastructure;
 using CryptoAgent.Api.Hubs;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,33 @@ builder.Services.AddCors(options =>
 builder.Services.AddHostedService<PriceHubDispatcher>();
 
 var app = builder.Build();
+
+// ── Auto-apply EF Migrations on startup ───────────────────────────────────
+// Safe to run every time: EF only applies *pending* migrations.
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CryptoAgent.Infrastructure.Data.AppDbContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+    var retries = 5;
+    while (retries > 0)
+    {
+        try
+        {
+            logger.LogInformation("Applying EF Core migrations...");
+            await db.Database.MigrateAsync();
+            logger.LogInformation("Database migration completed successfully.");
+            break;
+        }
+        catch (Exception ex)
+        {
+            retries--;
+            logger.LogWarning(ex, "DB not ready yet. Retrying in 5s... ({Retries} attempts left)", retries);
+            if (retries == 0) throw;
+            await Task.Delay(TimeSpan.FromSeconds(5));
+        }
+    }
+}
 
 // ── Pipeline ──────────────────────────────────────────────────────────────
 if (app.Environment.IsDevelopment())

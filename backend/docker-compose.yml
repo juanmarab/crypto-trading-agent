@@ -1,0 +1,55 @@
+services:
+
+  # ── PostgreSQL 16 + pgvector ───────────────────────────────────────────────
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: crypto_agent_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: crypto_agent
+      POSTGRES_USER: crypto_user
+      POSTGRES_PASSWORD: crypto_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U crypto_user -d crypto_agent" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  # ── CryptoAgent .NET API ───────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto_agent_api
+    restart: unless-stopped
+    ports:
+      - "5000:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+
+      # DB connection (points to the 'db' service above)
+      ConnectionStrings__DefaultConnection: >-
+        Host=db;Port=5432;Database=crypto_agent; Username=crypto_user;Password=crypto_pass; Include Error Detail=true
+
+      # API Keys — override these via .env file or environment secrets
+      ApiKeys__Binance: ${BINANCE_API_KEY:-}
+      ApiKeys__CryptoPanic: ${CRYPTOPANIC_API_KEY:-}
+      ApiKeys__GoogleGemini: ${GOOGLE_GEMINI_API_KEY:-}
+      ApiKeys__TelegramBotToken: ${TELEGRAM_BOT_TOKEN:-}
+
+      # Logging
+      Logging__LogLevel__Default: Information
+      Logging__LogLevel__Microsoft.AspNetCore: Warning
+      Logging__LogLevel__Microsoft.EntityFrameworkCore: Warning
+
+volumes:
+  pgdata:
+    driver: local

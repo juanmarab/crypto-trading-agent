@@ -16,3 +16,5 @@ C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.In
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Infrastructure\obj\Debug\net8.0\refint\CryptoAgent.Infrastructure.dll
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Infrastructure\obj\Debug\net8.0\CryptoAgent.Infrastructure.pdb
 C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Infrastructure\obj\Debug\net8.0\ref\CryptoAgent.Infrastructure.dll
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Infrastructure\bin\Debug\net8.0\CryptoAgent.Infrastructure.runtimeconfig.json
+C:\Users\Juanma\Documents\GitHub\crypto-trading-agent\backend\src\CryptoAgent.Infrastructure\obj\Debug\net8.0\CryptoAgent.Infrastructure.genruntimeconfig.cache

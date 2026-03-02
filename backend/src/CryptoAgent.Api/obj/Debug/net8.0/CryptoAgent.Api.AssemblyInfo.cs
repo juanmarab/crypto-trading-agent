@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CryptoAgent.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+168181642dfe0f69d8fd809eb7937e47a1114e76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+008ea75ab5318a0ca90302ecd821b07697e97659")]
 [assembly: System.Reflection.AssemblyProductAttribute("CryptoAgent.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CryptoAgent.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
