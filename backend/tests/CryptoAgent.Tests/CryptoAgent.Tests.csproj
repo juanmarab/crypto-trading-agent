@@ -20,10 +20,4 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\CryptoAgent.Domain\CryptoAgent.Domain.csproj" />
-    <ProjectReference Include="..\..\src\CryptoAgent.Application\CryptoAgent.Application.csproj" />
-    <ProjectReference Include="..\..\src\CryptoAgent.Infrastructure\CryptoAgent.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

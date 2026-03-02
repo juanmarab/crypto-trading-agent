@@ -1,0 +1,30 @@
+# Exclude anything that's not needed in the Docker build context
+
+# Git
+.git
+.gitignore
+
+# Build outputs
+**/bin/
+**/obj/
+
+# Test projects (not needed in production image)
+tests/
+
+# IDE / OS files
+.vs/
+*.user
+.DS_Store
+Thumbs.db
+
+# Frontend (completely separate)
+../frontend/
+
+# Env files with secrets
+.env
+*.env
+
+# Docker files themselves (optional, saves a few bytes)
+Dockerfile
+docker-compose.yml
+.dockerignore
