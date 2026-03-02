@@ -1,4 +1,5 @@
 using CryptoAgent.Infrastructure;
+using CryptoAgent.Api.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "CryptoAgent API", Version = "v1" });
 });
+
+// SignalR (real-time price streaming)
+builder.Services.AddSignalR();
 
 // Infrastructure (EF Core + Repositories)
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -28,6 +32,9 @@ builder.Services.AddCors(options =>
     });
 });
 
+// PriceHub dispatcher (bridges BinanceService events to SignalR clients)
+builder.Services.AddHostedService<PriceHubDispatcher>();
+
 var app = builder.Build();
 
 // ── Pipeline ──────────────────────────────────────────────────────────────
@@ -41,5 +48,6 @@ app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthorization();
 app.MapControllers();
+app.MapHub<PriceHub>("/hubs/price");
 
 app.Run();
