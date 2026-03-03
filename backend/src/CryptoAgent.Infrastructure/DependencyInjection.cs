@@ -19,7 +19,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // ── Database ──────────────────────────────────────────────────────
+        // ── Database ──────────────────────────────────────────────────────────
         var connectionString = configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
@@ -30,47 +30,86 @@ public static class DependencyInjection
                 npgsql.EnableRetryOnFailure(maxRetryCount: 3);
             }));
 
-        // ── Repositories ──────────────────────────────────────────────────
+        // ── Repositories ──────────────────────────────────────────────────────
         services.AddScoped<IMarketNewsRepository, MarketNewsRepository>();
         services.AddScoped<ITechnicalSnapshotRepository, TechnicalSnapshotRepository>();
         services.AddScoped<IAgentDecisionRepository, AgentDecisionRepository>();
         services.AddScoped<IUserAlertRepository, UserAlertRepository>();
 
-        // ── Services ──────────────────────────────────────────────────────
+        // ── Core Services ─────────────────────────────────────────────────────
         services.AddSingleton<IBinanceService, BinanceService>();
         services.AddSingleton<ITechnicalAnalysisService, TechnicalAnalysisService>();
 
-        // ── Phase 3: Embedding Service (Gemini text-embedding-004) ────────
-        services.AddHttpClient<IEmbeddingService, GeminiEmbeddingService>(client =>
-        {
-            client.Timeout = TimeSpan.FromSeconds(30);
-        });
+        // ── LLM Service ───────────────────────────────────────────────────────
+        // Priority: Groq (fastest, free) → Gemini (free tier) → Mock (no key, local dev)
+        var groqKey   = configuration["ApiKeys:Groq"];
+        var geminiKey = configuration["ApiKeys:GoogleGemini"];
 
-        // ── Phase 3: CryptoPanic News Service ─────────────────────────────
-        services.AddSingleton(CryptoPanicOptions.FromConfiguration(configuration));
-        services.AddHttpClient<ICryptoPanicService, CryptoPanicService>(client =>
+        if (!string.IsNullOrWhiteSpace(groqKey))
         {
-            client.Timeout = TimeSpan.FromSeconds(30);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-        });
-
-        // ── Phase 4: LLM Service ──────────────────────────────────────────
-        services.AddHttpClient<ILlmService, GeminiLlmService>(client =>
+            services.AddHttpClient<ILlmService, GroqLlmService>(client =>
+            {
+                client.BaseAddress = new Uri("https://api.groq.com/");
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {groqKey}");
+                client.Timeout = TimeSpan.FromSeconds(30); // Groq is very fast
+            });
+        }
+        else if (!string.IsNullOrWhiteSpace(geminiKey))
         {
-            client.Timeout = TimeSpan.FromSeconds(60);
-        });
+            services.AddHttpClient<ILlmService, GeminiLlmService>(client =>
+            {
+                client.Timeout = TimeSpan.FromSeconds(60);
+            });
+        }
+        else
+        {
+            // Local dev / testing: realistic mocked decisions, zero API calls
+            services.AddSingleton<ILlmService, MockLlmService>();
+        }
 
-        // ── Phase 4: Telegram Notification Service ────────────────────────
+        // ── Embedding Service ─────────────────────────────────────────────────
+        // Groq does not offer embeddings. Gemini → Mock fallback.
+        if (!string.IsNullOrWhiteSpace(geminiKey))
+        {
+            services.AddHttpClient<IEmbeddingService, GeminiEmbeddingService>(client =>
+            {
+                client.Timeout = TimeSpan.FromSeconds(30);
+            });
+        }
+        else
+        {
+            // Dummy 768-dim vectors — RAG relevance won't be semantic, but the pipeline works
+            services.AddSingleton<IEmbeddingService, MockEmbeddingService>();
+        }
+
+        // ── News Ingestion ────────────────────────────────────────────────────
+        var panicKey = configuration["ApiKeys:CryptoPanic"];
+        services.AddSingleton(new CryptoPanicOptions { ApiKey = panicKey ?? string.Empty });
+
+        if (!string.IsNullOrWhiteSpace(panicKey))
+        {
+            services.AddHttpClient<ICryptoPanicService, CryptoPanicService>(client =>
+            {
+                client.Timeout = TimeSpan.FromSeconds(30);
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+            });
+        }
+        else
+        {
+            // Generates synthetic headlines so the news feed and RAG pipeline populate locally
+            services.AddSingleton<ICryptoPanicService, MockNewsService>();
+        }
+
+        // ── Telegram Notifications ────────────────────────────────────────────
         services.AddHttpClient<ITelegramService, TelegramService>(client =>
         {
             client.Timeout = TimeSpan.FromSeconds(15);
         });
 
-        // ── Phase 4: AI Orchestrator ──────────────────────────────────────
-        // Scoped because it depends on scoped repositories
+        // ── AI Orchestrator (scoped — depends on scoped repos) ────────────────
         services.AddScoped<AgentOrchestrationService>();
 
-        // ── Background Workers ────────────────────────────────────────────
+        // ── Background Workers ────────────────────────────────────────────────
         services.AddHostedService<BinanceWebSocketWorker>();
         services.AddHostedService<IndicatorCalculationWorker>();
         services.AddHostedService<NewsIngestionWorker>();

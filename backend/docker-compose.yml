@@ -42,6 +42,7 @@ services:
       # API Keys — override these via .env file or environment secrets
       ApiKeys__Binance: ${BINANCE_API_KEY:-}
       ApiKeys__CryptoPanic: ${CRYPTOPANIC_API_KEY:-}
+      ApiKeys__Groq: ${GROQ_API_KEY:-}
       ApiKeys__GoogleGemini: ${GOOGLE_GEMINI_API_KEY:-}
       ApiKeys__TelegramBotToken: ${TELEGRAM_BOT_TOKEN:-}
 

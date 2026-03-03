@@ -11,6 +11,7 @@ obj/
 
 ## User secrets
 secrets.json
+.env
 
 ## IDE
 .vs/
