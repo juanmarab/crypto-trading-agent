@@ -35,31 +35,38 @@ public class TechnicalAnalysisService : ITechnicalAnalysisService
         var macdSignalType = DeriveMacdSignal(macdLine, macdSignal, macdHistogram, closes);
         var bbPosition = DeriveBbPosition(latest.Close, bbUpper, bbLower);
 
+        // Support & Resistance levels from swing highs/lows
+        var (s1, s2, r1, r2) = SupportResistanceCalculator.Calculate(klines);
+
         return new IndicatorSet
         {
-            Asset = asset,
-            Timeframe = timeframe,
-            Timestamp = latest.CloseTime,
-            Open = latest.Open,
-            High = latest.High,
-            Low = latest.Low,
-            Close = latest.Close,
-            Volume = latest.Volume,
-            Ema20 = ema20,
-            Ema50 = ema50,
-            Ema200 = ema200,
-            Rsi = rsi,
-            MacdLine = macdLine,
-            MacdSignal = macdSignal,
-            MacdHistogram = macdHistogram,
-            BbUpper = bbUpper,
-            BbMiddle = bbMiddle,
-            BbLower = bbLower,
-            Atr = atr,
-            EmaTrend = emaTrend,
-            RsiSignal = rsiSignal,
-            MacdSignalType = macdSignalType,
-            BbPosition = bbPosition
+            Asset           = asset,
+            Timeframe       = timeframe,
+            Timestamp       = latest.CloseTime,
+            Open            = latest.Open,
+            High            = latest.High,
+            Low             = latest.Low,
+            Close           = latest.Close,
+            Volume          = latest.Volume,
+            Ema20           = ema20,
+            Ema50           = ema50,
+            Ema200          = ema200,
+            Rsi             = rsi,
+            MacdLine        = macdLine,
+            MacdSignal      = macdSignal,
+            MacdHistogram   = macdHistogram,
+            BbUpper         = bbUpper,
+            BbMiddle        = bbMiddle,
+            BbLower         = bbLower,
+            Atr             = atr,
+            EmaTrend        = emaTrend,
+            RsiSignal       = rsiSignal,
+            MacdSignalType  = macdSignalType,
+            BbPosition      = bbPosition,
+            Support1        = s1,
+            Support2        = s2,
+            Resistance1     = r1,
+            Resistance2     = r2
         };
     }
 

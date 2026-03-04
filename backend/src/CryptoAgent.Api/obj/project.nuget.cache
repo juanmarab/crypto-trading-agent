@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "J2fOZ90q+qA2Ae/8fz4I2Vf3PBCzc/3EQOu3Aec41HoqPr1v67eKnwbMR3hLhgBxa8XyCa07uFED1EqBoBn4jw==",
+  "dgSpecHash": "uT8YEdkMT5qogCAmRXSs/Ei7cWdSm840v7TefQ/U2Fn9W0FcOWGjPwI6efvVi3Y8b3fVOcy5lhZueWhGBrRH7Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Juanma\\Documents\\GitHub\\crypto-trading-agent\\backend\\src\\CryptoAgent.Api\\CryptoAgent.Api.csproj",
   "expectedPackageFiles": [
@@ -67,6 +67,9 @@
     "C:\\Users\\Juanma\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\Juanma\\.nuget\\packages\\system.reflection.metadata\\6.0.1\\system.reflection.metadata.6.0.1.nupkg.sha512",
     "C:\\Users\\Juanma\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Juanma\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
+    "C:\\Users\\Juanma\\.nuget\\packages\\system.servicemodel.http\\10.0.652802\\system.servicemodel.http.10.0.652802.nupkg.sha512",
+    "C:\\Users\\Juanma\\.nuget\\packages\\system.servicemodel.primitives\\10.0.652802\\system.servicemodel.primitives.10.0.652802.nupkg.sha512",
     "C:\\Users\\Juanma\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\Juanma\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512",
     "C:\\Users\\Juanma\\.nuget\\packages\\system.threading.channels\\8.0.0\\system.threading.channels.8.0.0.nupkg.sha512"

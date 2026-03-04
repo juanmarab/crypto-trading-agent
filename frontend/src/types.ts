@@ -35,6 +35,9 @@ export interface IndicatorSet {
     rsiSignal?: string;
     macdSignalType?: string;
     bbPosition?: string;
+    // S/R levels
+    support1?: number; support2?: number;
+    resistance1?: number; resistance2?: number;
 }
 
 export interface TechnicalAnalysisDto {
@@ -55,6 +58,20 @@ export interface AgentDecision {
     action: TradeAction;
     suggestedLeverage?: number;
     confidence: number;
+
+    // ── Quant trade parameters ──────────────────────────────────────────────
+    entryPrice?: number;
+    takeProfit?: number;       // TP1 — RR 1:1.5
+    takeProfit2?: number;      // TP2 — RR 1:3
+    stopLoss?: number;
+    positionSizeUsd?: number;  // $ size for 1% risk
+    holdingPeriodHours?: number;
+    technicalReasoning?: string;
+
+    // ── Confluence & alerts ─────────────────────────────────────────────────
+    confluenceScore?: number;  // 1–10
+    sendTelegramAlert?: boolean;
+    riskRewardRatio?: string;  // e.g. "1:1.5 / 1:3"
     snapshotId?: string;
 }
 

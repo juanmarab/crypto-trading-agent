@@ -9,23 +9,15 @@ using Microsoft.Extensions.Logging;
 namespace CryptoAgent.Infrastructure.Services.Llm;
 
 /// <summary>
-/// Calls the Groq LPU inference API using its OpenAI-compatible endpoint.
+/// Calls the Groq LPU inference API using the institutional quant analyst role.
 ///
 /// Model: llama-3.3-70b-versatile
-///   — Best-in-class open-source reasoning, excellent at structured JSON.
-///   — Groq delivers it at 100+ tokens/sec (far faster than any cloud API).
-///
-/// Free tier: https://console.groq.com/keys
-///   — 14,400 requests / day  |  30 requests / minute  |  fully free.
-///   — Our agent runs every 15 min × 4 assets = 16 calls/hour — well within limits.
-///
-/// API docs: https://console.groq.com/docs/openai
+/// Free tier: 14,400 req/day | https://console.groq.com/keys
 /// </summary>
 public class GroqLlmService : ILlmService
 {
-    private const string ChatCompletionsUrl = "https://api.groq.com/openai/v1/chat/completions";
-
-    // Best model for structured reasoning on Groq (Dec 2024 → current)
+    // Relative path — BaseAddress (https://api.groq.com/) is set by the DI HttpClient factory
+    private const string ChatCompletionsUrl = "openai/v1/chat/completions";
     private const string Model = "llama-3.3-70b-versatile";
 
     private static readonly JsonSerializerOptions JsonOpts = new()
@@ -47,32 +39,44 @@ public class GroqLlmService : ILlmService
         string structuredPrompt,
         CancellationToken cancellationToken = default)
     {
-        _logger.LogInformation("Calling Groq ({Model}) for trading decision...", Model);
+        _logger.LogInformation("Calling Groq ({Model}) for quant analysis...", Model);
 
-        // System message that enforces strict JSON output.
         const string systemMessage =
             """
-            You are an expert crypto trading analyst. 
-            You MUST respond ONLY with a single, valid JSON object — no markdown, no explanation, no code fences.
-            The JSON must contain exactly these fields:
+            You are an expert quantitative analyst specialising in crypto futures trading.
+            Evaluate probabilities — do not predict the future.
+
+            Your task: Given the market data in the user message, determine:
+            1. Direction: Long | Short | Neutral
+               Choose based on 3+ confluent technical signals. No clear edge → Neutral.
+            2. Confidence score (confluenceScore): 1–10
+               Count aligned signals: EMA trend, RSI zone, MACD cross, BB position,
+               S/R proximity, volume, news sentiment. sendTelegram = true when score >= 8.
+            3. Suggested leverage: 1–10x (null if Neutral). Higher leverage only for high confluence (>=8).
+            4. Holding period hours: estimated hours to hold this position (null if Neutral).
+            5. Technical reasoning: Exactly 2 sentences quoting specific indicator values.
+               Example: "RSI at 62.3 is rising toward overbought with MACD in bullish cross.
+                         EMA20 (84200) > EMA50 (83100) > EMA200 (81400) confirming uptrend structure."
+
+            CRITICAL: Return ONLY the JSON object — no markdown, no prose, no code fences.
+            All numeric fields must be plain numbers or null. Never include formulas or math expressions.
+
             {
-              "technicalVerdict": "<BULLISH | BEARISH | NEUTRAL>",
-              "fundamentalVerdict": "<BULLISH | BEARISH | NEUTRAL>",
-              "action": "<Long | Short | Hold>",
-              "suggestedLeverage": <integer 1-10, or null if Hold>,
-              "confidence": <float 0.0 - 1.0>,
-              "reasoning": "<1-3 concise sentences explaining the decision>"
+              "direction": "Long|Short|Neutral",
+              "confluenceScore": 5,
+              "sendTelegram": false,
+              "suggestedLeverage": null,
+              "holdingPeriodHours": null,
+              "technicalReasoning": "2-sentence reasoning quoting actual indicator values."
             }
-            Only recommend Long or Short when there is strong multi-indicator confluence.
-            Leverage > 3 only when confidence > 0.75. Otherwise use Hold and null leverage.
             """;
 
         var requestBody = new
         {
             model = Model,
-            temperature = 0.15,     // Low temp → consistent, deterministic analysis
-            max_tokens = 400,       // Our JSON is small; keep it tight
-            response_format = new { type = "json_object" }, // Enforce JSON output at API level
+            temperature = 0.10,
+            max_tokens = 700,
+            response_format = new { type = "json_object" },
             messages = new[]
             {
                 new { role = "system", content = systemMessage },
@@ -86,12 +90,17 @@ public class GroqLlmService : ILlmService
             using var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await _http.PostAsync(ChatCompletionsUrl, content, cancellationToken);
-            response.EnsureSuccessStatusCode();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorBody = await response.Content.ReadAsStringAsync(cancellationToken);
+                _logger.LogError("Groq API error {Status}: {Body}", (int)response.StatusCode, errorBody);
+                response.EnsureSuccessStatusCode(); // throws HttpRequestException
+            }
 
             var responseJson = await response.Content.ReadFromJsonAsync<JsonElement>(
                 cancellationToken: cancellationToken);
 
-            // Extract the text from the OpenAI-compatible response envelope
             var rawText = responseJson
                 .GetProperty("choices")[0]
                 .GetProperty("message")
@@ -100,21 +109,39 @@ public class GroqLlmService : ILlmService
 
             _logger.LogDebug("Groq raw response: {Raw}", rawText);
 
-            // Parse the structured decision from the model's JSON output
             var parsed = JsonSerializer.Deserialize<GroqDecisionJson>(rawText, JsonOpts)
                 ?? throw new JsonException("Groq returned null/unparseable JSON.");
 
+            var direction = parsed.Direction?.ToLowerInvariant();
+            var action = direction switch
+            {
+                "long"  => TradeAction.LONG,
+                "short" => TradeAction.SHORT,
+                _       => TradeAction.HOLD
+            };
+
+            var techVerdict = action == TradeAction.LONG ? "BULLISH"
+                : action == TradeAction.SHORT ? "BEARISH" : "NEUTRAL";
+
             _logger.LogInformation(
-                "Groq decision parsed — Action: {Action}, Confidence: {Conf:P0}, Leverage: {Lev}x",
-                parsed.Action, parsed.Confidence, parsed.SuggestedLeverage);
+                "Groq decision: {Dir} | Score: {Score}/10 | Telegram: {Tg}",
+                parsed.Direction, parsed.ConfluenceScore, parsed.SendTelegram);
 
             return new LlmDecisionResult
             {
-                TechnicalVerdict   = parsed.TechnicalVerdict   ?? "NEUTRAL",
-                FundamentalVerdict = parsed.FundamentalVerdict ?? "NEUTRAL",
-                Action             = ParseAction(parsed.Action),
+                TechnicalVerdict   = techVerdict,
+                FundamentalVerdict = "NEUTRAL",
+                Action             = action,
                 SuggestedLeverage  = parsed.SuggestedLeverage,
-                Confidence         = parsed.Confidence,
+                Confidence         = parsed.ConfluenceScore.HasValue
+                                       ? (decimal)parsed.ConfluenceScore.Value / 10m
+                                       : null,
+                // Numeric trade parameters are NOT set here —
+                // they are computed by AgentOrchestrationService from real indicator data
+                TechnicalReasoning = parsed.TechnicalReasoning ?? string.Empty,
+                HoldingPeriodHours = parsed.HoldingPeriodHours,
+                ConfluenceScore    = parsed.ConfluenceScore,
+                SendTelegramAlert  = parsed.SendTelegram,
                 RawOutput          = rawText
             };
         }
@@ -130,35 +157,13 @@ public class GroqLlmService : ILlmService
         }
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
-
-    private static TradeAction ParseAction(string? action) => action?.ToLowerInvariant() switch
-    {
-        "long"  => TradeAction.LONG,
-        "short" => TradeAction.SHORT,
-        _       => TradeAction.HOLD
-    };
-
-    // ── Internal DTO matching Groq/Llama JSON output ──────────────────────────
-
     private sealed class GroqDecisionJson
     {
-        [JsonPropertyName("technicalVerdict")]
-        public string? TechnicalVerdict { get; set; }
-
-        [JsonPropertyName("fundamentalVerdict")]
-        public string? FundamentalVerdict { get; set; }
-
-        [JsonPropertyName("action")]
-        public string? Action { get; set; }
-
-        [JsonPropertyName("suggestedLeverage")]
-        public decimal? SuggestedLeverage { get; set; }
-
-        [JsonPropertyName("confidence")]
-        public decimal? Confidence { get; set; }
-
-        [JsonPropertyName("reasoning")]
-        public string? Reasoning { get; set; }
+        [JsonPropertyName("direction")]          public string? Direction          { get; set; }
+        [JsonPropertyName("confluenceScore")]    public int?    ConfluenceScore    { get; set; }
+        [JsonPropertyName("sendTelegram")]       public bool    SendTelegram       { get; set; }
+        [JsonPropertyName("suggestedLeverage")]  public decimal? SuggestedLeverage { get; set; }
+        [JsonPropertyName("holdingPeriodHours")] public int?    HoldingPeriodHours { get; set; }
+        [JsonPropertyName("technicalReasoning")] public string? TechnicalReasoning { get; set; }
     }
 }
