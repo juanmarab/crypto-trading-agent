@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CryptoAgent.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8a35a3b0d246ebab0743d396aaa329917bf304e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9337ff7749ce80ea035e464e5bbefe9e0bb3c2d8")]
 [assembly: System.Reflection.AssemblyProductAttribute("CryptoAgent.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CryptoAgent.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
